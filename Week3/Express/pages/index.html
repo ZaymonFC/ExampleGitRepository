@@ -9,26 +9,16 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous">
     </script>
-        $(document).ready(function() {
-            console.log('ready')
-            $.get("/getData")
-        })
-    <script>
-
-    </script>
-
-
-
 </head>
 <body>
     <div id="loginpage">
         <h2>Home Page</h2>
         <form id="loginForm">
             <label for="username">Username</label>
-            <input type="text" id="username", name="username", value="">
+            <input type="text" id="username", name="username">
             <label for="password">Password</label>
-            <input type="password", id="password", name="password" value="">
-            <input type="submit" value="Submit">
+            <input type="password", id="password", name="password">
+            <input id="submit" type="button" value="Submit">
         </form>
         <div>
             <h2 id="status"></h2>
@@ -37,35 +27,27 @@
 
     <script>
         window.addEventListener('load', function() {
-            function sendData() {
-                let formData = new FormData(formElement)
-                let XHR = new XMLHttpRequest()
-                
-                // On Success
-                XHR.addEventListener("load", function(event) {
-                    let status = document.getElementById('status')
-                    status.innerText = event.target.responseText
-                    console.log('Working')
-                })
-                
-                XHR.addEventListener("error", function(event) {
-                    alert('Didn\'t Work')
-                })
-
-                XHR.open("POST", "/login")
-                XHR.send(formData)
+            function onSuccess(data) {
+                console.log(data)
             }
 
-            // Access the form element
-            var formElement = document.getElementById('loginForm')
+            function onFailure(xhr, resp, text) {
+                console.error('FAILED: ' + xhr + resp + text)
+            }
 
-            // Control the forms submit event
-            formElement.addEventListener("submit", function(event) {
-                event.preventDefault()
-                sendData()
+            $('#submit').click(function() {
+                $.ajax({
+                    url: 'login',
+                    type: 'POST',
+                    data: $('#loginForm').serialize(),
+                    //dataType: 'json',
+                    success: onSuccess,
+                    error: onFailure
+                })
+                var str = $("#loginForm").serialize();
+                $( "#status" ).text( str + 'asdf' );
             })
         })
     </script>
-
 </body>
 </html>

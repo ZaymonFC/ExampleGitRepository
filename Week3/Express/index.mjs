@@ -1,25 +1,30 @@
-import express from 'express'
-import http from 'http'
+const express = require('express')
+const bodyParser = require('body-parser')
 
 const app = express()
 const port = 3000
 
 // Define the statically available content
 app.use(express.static('./public'))
-const __dirname = './pages'
+
+let jsonParser = bodyParser.json()
+
+const directory = './pages'
 
 app.get('/test', (req, res) => {
     let page = 'test.html'
-    res.sendfile(`${__dirname}/${page}`)
+    res.sendfile(`${directory}/${page}`)
 })
 
 app.get('/', (req, res) => {
     // res.send(`Express JS Server Running on ${port}`)
-    res.sendfile(`${__dirname}/index.html`)
+    res.sendfile(`${directory}/index.html`)
 })
 
-app.post('/login', (req, res) => {
+app.post('/login', jsonParser, (req, res) => {
+
     console.log(req.body)
+    res.send('Okay')
 })
 
 app.listen(port, () => console.log(`Express app listening on port ${port}`))
