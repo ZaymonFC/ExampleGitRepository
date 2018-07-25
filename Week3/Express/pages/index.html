@@ -1,0 +1,71 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <script 
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+    </script>
+        $(document).ready(function() {
+            console.log('ready')
+            $.get("/getData")
+        })
+    <script>
+
+    </script>
+
+
+
+</head>
+<body>
+    <div id="loginpage">
+        <h2>Home Page</h2>
+        <form id="loginForm">
+            <label for="username">Username</label>
+            <input type="text" id="username", name="username", value="">
+            <label for="password">Password</label>
+            <input type="password", id="password", name="password" value="">
+            <input type="submit" value="Submit">
+        </form>
+        <div>
+            <h2 id="status"></h2>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            function sendData() {
+                let formData = new FormData(formElement)
+                let XHR = new XMLHttpRequest()
+                
+                // On Success
+                XHR.addEventListener("load", function(event) {
+                    let status = document.getElementById('status')
+                    status.innerText = event.target.responseText
+                    console.log('Working')
+                })
+                
+                XHR.addEventListener("error", function(event) {
+                    alert('Didn\'t Work')
+                })
+
+                XHR.open("POST", "/login")
+                XHR.send(formData)
+            }
+
+            // Access the form element
+            var formElement = document.getElementById('loginForm')
+
+            // Control the forms submit event
+            formElement.addEventListener("submit", function(event) {
+                event.preventDefault()
+                sendData()
+            })
+        })
+    </script>
+
+</body>
+</html>
