@@ -29,6 +29,12 @@
         window.addEventListener('load', function() {
             function onSuccess(data) {
                 console.log(data)
+                if (data.status) {
+                    console.log('Successful credentials entered into form')
+                    location.href = '/account'
+                } else {
+                    $('#status').text('Wrong Username Password Combination')
+                }
             }
 
             function onFailure(xhr, resp, text) {
@@ -39,13 +45,12 @@
                 $.ajax({
                     url: 'login',
                     type: 'POST',
-                    data: $('#loginForm').serialize(),
-                    //dataType: 'json',
+                    dataType: 'json',
+                    data: JSON.stringify($('#loginForm').serializeArray()),
                     success: onSuccess,
-                    error: onFailure
+                    error: onFailure,
+                    contentType: 'application/json'
                 })
-                var str = $("#loginForm").serialize();
-                $( "#status" ).text( str + 'asdf' );
             })
         })
     </script>
