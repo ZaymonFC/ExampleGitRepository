@@ -2,12 +2,14 @@ const express = require('express')
 const bodyParser = require('body-parser')
 
 const app = express()
-const port = 3000
+const port = 2000
 
 // Define the statically available content
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+app.use(static)
 
 const directory = '/pages'
 
@@ -27,21 +29,13 @@ app.get('/account', (req, res) => {
 
 app.post('/login', (req, res) => {
     const username = 'test'
-    const password = '1234'
+    const password = 'test'
 
     let data = req.body
 
-    if (data[0].value === username && data[1].value === '1234') {
-        let responseData = {
-            status: true
-        }
-        res.send(responseData)
-        return
-    }
-    let responseData = {
-        status: false
-    }
-    res.send(responseData)
+    console.log(req.body)
+    
+    // res.send(responseData)
     res.end()
 })
 
