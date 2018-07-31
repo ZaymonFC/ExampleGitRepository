@@ -32,15 +32,16 @@ export class LoginComponent implements OnInit {
     this.http.post(url, body)
       .subscribe(response => {
         console.log('Response Received')
-        if (response.auth) {
-          // Set a user object in local storage
-          if (window.localStorage) {
-            console.log('storage ready')
+        if (response != null) {
+          if (response.auth) {
+            // Set a user object in local storage
+            if (window.localStorage) {
+              console.log('storage ready')
+              localStorage.setItem('userInfo', JSON.stringify(response.userObj))
+            }
 
-            localStorage.setItem('userInfo', JSON.stringify(response.userObj))
+            this.router.navigateByUrl('account')
           }
-
-          this.router.navigateByUrl('account')
         } else {
           this.statusMessage = 'Wrong Username or Password Combination'
           this.showError = true
