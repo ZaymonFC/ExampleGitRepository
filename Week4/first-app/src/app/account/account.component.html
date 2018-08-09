@@ -1,3 +1,11 @@
-<h2>Account Page</h2>
+<h3>Account Page</h3>
 
-<p>Hello There :)</p>
+<div class="card">
+    <div class="card-header">
+        <h3>Hello there, {{username}}</h3>
+    </div>
+    <div class="card-body">
+        <p>You were born on: {{dateOfBirth.toLocaleDateString()}}</p>
+        <p>This means you are: {{age}} years old</p>
+    </div>
+</div>

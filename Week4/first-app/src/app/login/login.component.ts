@@ -22,7 +22,25 @@ export class LoginComponent implements OnInit {
 
   loginUser(event: Event) {
     event.preventDefault()
-    if (this.username === 'example@example.com' && this.password === 'test') {
+    // Query the express Server
+
+
+    if (this.username === 'test' && this.password === 'test') {
+      // Set a user object in local storage
+      if (window.localStorage) {
+        console.log('storage ready')
+
+        const userObj = {
+          'id': 1,
+          'username': 'General Kenobi',
+          'birthdate': new Date('July 1, 1997'),
+        }
+
+        console.log(userObj)
+
+        localStorage.setItem('userInfo', JSON.stringify(userObj))
+      }
+
       this.router.navigateByUrl('account')
     } else {
       this.statusMessage = 'Wrong Username or Password Combination'
