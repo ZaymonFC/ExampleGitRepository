@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router'
 import { SocketService } from '../services/socket.service';
+import { Observable, Subscription } from 'rxjs';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -10,7 +11,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   private username = ''
   private messages
   private message
-  private connection
+  private connection: Subscription
 
   constructor(private router: Router, private socketService: SocketService) {
     if (window.sessionStorage) {

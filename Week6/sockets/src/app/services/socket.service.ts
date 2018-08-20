@@ -18,8 +18,7 @@ export class SocketService {
   }
 
   getMessages() {
-    const obMessages = new Observable(
-      observer => {
+    const obMessages = new Observable(observer => {
         this.socket = io()
 
         // Listen for the new-message event from the server
