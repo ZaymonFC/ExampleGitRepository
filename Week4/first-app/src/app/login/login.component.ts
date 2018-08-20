@@ -9,10 +9,10 @@ import { HttpClient } from '@angular/common/http'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  username = ''
-  password = ''
-  statusMessage = ''
-  showError: boolean
+  private username = ''
+  private password = ''
+  private statusMessage = ''
+  private showError: boolean
 
   constructor(private router: Router, private form: FormsModule, private http: HttpClient) {
     this.showError = false
