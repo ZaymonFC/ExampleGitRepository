@@ -14,6 +14,4 @@ export async function addProduct(req, res) {
       ok: false
     })
   }
-
-  req.close()
 }

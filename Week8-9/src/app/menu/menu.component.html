@@ -7,15 +7,9 @@
       <li class="{{ this.routeName === '' ? 'nav-item active' : 'nav-item' }}">
         <a class="nav-link" [routerLink]="['/']">Home</a>
       </li>
-      <!-- <li class="{{ this.routeName === 'chat' ? 'nav-item active' : 'nav-item' }}">
-        <a class="nav-link" [routerLink]="['chat']">Chat</a>
-      </li> -->
-      <li class="{{ this.routeName === 'dashboard' ? 'nav-item active' : 'nav-item' }}">
-        <a class="nav-link" [routerLink]="['dashboard']">Dashboard </a>
+      <li class="{{ this.routeName === 'productView' ? 'nav-item active' : 'nav-item' }}">
+        <a class="nav-link" [routerLink]="['productView']">Products</a>
       </li>
-      <!-- <li class="{{ this.routeName === '' ? 'nav-item active' : 'nav-item' }}">
-        <a class="nav-link" [routerLink]="[]">Link</a>
-      </li> -->
     </ul>
     <form *ngIf="loggedIn" class="form-inline my-2 my-lg-0">
       <label class="mr-sm-2">Logged in as {{ user.username }}</label>

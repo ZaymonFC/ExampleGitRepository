@@ -13,6 +13,9 @@ import { NotFoundComponent } from './not-found/not-found.component'
 import { MenuComponent } from './menu/menu.component'
 import { RouterModule, Routes } from '@angular/router'
 import { CounterComponent } from './presentation/counter/counter.component';
+import { ProductComponent } from './product/product.component';
+import { CreateComponent } from './product/create/create.component';
+import { UpdateComponent } from './product/update/update.component';
 
 
 @NgModule({
@@ -22,6 +25,9 @@ import { CounterComponent } from './presentation/counter/counter.component';
     NotFoundComponent,
     MenuComponent,
     CounterComponent,
+    ProductComponent,
+    CreateComponent,
+    UpdateComponent,
   ],
   imports: [
     BrowserModule,

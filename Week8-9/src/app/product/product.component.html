@@ -1,0 +1,20 @@
+<form (submit)="searchProducts($event)">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Search Products" [(ngModel)]='search' name="search">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </div>
+  </div>
+</form>
+
+<div class="card" *ngFor="let p of products">
+  <div class="card-header">{{p.name}}</div>
+  <div class="card-body">
+    ${{p.price}}  {{p.description}}  {{p.type}} 
+    <button class="btn btn-outline-primary" (click)="updateProduct(p._id)">Modify Product</button>
+  </div>
+</div>
+
+<br>
+
+<button class="btn btn-outline-primary" (click)="addProduct()">Add Product</button>

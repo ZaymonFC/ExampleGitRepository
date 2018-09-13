@@ -1,0 +1,23 @@
+<h2>Update Product</h2>
+
+<form (submit)="updateProduct($event)">
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" placeholder="Product Name" name="name" [(ngModel)]='name' value="{{product.name}}">
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <input type="text" class="form-control" placeholder="Description" name="description" [(ngModel)]='description' value="{{product.description}}">
+  </div>
+  <div class="form-group">
+    <label>Price</label>
+    <input type="number" class="form-control" placeholder="100" name="price" [(ngModel)]='price' value="{{product.price}}">
+  </div>
+  <div class="form-group">
+    <label>Type</label>
+    <input type="text" class="form-control" placeholder="Type" name="type" [(ngModel)]='type' value="{{product.type}}">
+  </div>
+  <input type="submit" class="btn btn-primary" value="Update Item">
+</form>
+<br>
+<button class="btn btn-outline-danger" (click)="delete(product._id)">Delete Product</button>
