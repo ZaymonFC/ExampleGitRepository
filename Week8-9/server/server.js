@@ -1,46 +1,40 @@
-import { ReadJSON, WriteJSON } from './data-access/file-handler'
-import {
-  selectN,
-  findItems,
-  insertItems,
-  updateItems,
-  deleteItems,
-  insertForeignKey,
-  removeForeignKey,
-  removeReference,
-  deleteCollection
-} from './data-access/repository'
-import { sanitiseUserObject, sanitiseGroupObject, sanitiseChannelObject } from './sanitizers';
+import { createCollection } from './data-access/create'
+import { addProduct } from './data-access/add'
 
-const uuid = require('uuid/v4')
 const path = require('path')
 let express = require('express')
 let app = express()
 
-const dataFiles = {
-  UserFile: 'server/data/user.json',
-  GroupFile: 'server/data/group.json',
-  ChannelFile: 'server/data/channel.json',
-}
-
-const uniqueFields = {
-  User: ['id', 'username'],
-  Group: ['id', 'name'],
-  Channel: ['id'],
-}
 
 let http = require('http')
 let server = http.Server(app)
 
-let socketIO = require('socket.io')
-let io = socketIO(server)
-
 const port = process.env.port || 4200
 
+// Setup MongoDB
+let MongoClient = require('mongodb').MongoClient
+const dbUrl = 'mongodb://127.0.0.1:27017'
+
 // Setup Middleware and static serving
+app.use(function (req, res, next) {
+  MongoClient.connect(dbUrl, {
+    useNewUrlParser: true,
+  }, (err, client) => {
+    if (err) throw err
+
+    req.db = client.db('test')
+    req.client = client
+    next()
+  })
+})
+
 app.use(express.static(path.join(__dirname, '../dist/sockets')))
 app.use(express.json())
 
+// Routes
+app.get('/createCollection', async (req, res) => createCollection(req, res))
+app.post('/product', async (req, res) => addProduct(req, res))
+app.delete('/product:id', async (req, res) => removeProduct(req, res))
 
 //
 // ─── SERVER START ───────────────────────────────────────────────────────────────
