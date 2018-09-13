@@ -28,9 +28,17 @@ export class ProductComponent implements OnInit {
 
   searchProducts(event: Event) {
     event.preventDefault()
+
+    if (!this.search) {
+      this.router.navigate(['productView'])
+    }
     console.log('Searching for: ', this.search)
 
-    // this.service.search(this.search)
+    this.service.searchProducts(this.search)
+      .subscribe((data: Product[]) => {
+        this.products = data
+        console.log(data)
+      })
   }
 
   addProduct() {

@@ -22,17 +22,11 @@ export async function getProduct(req, res) {
   console.log('Searching for: ', req.params.id)
   let collection = req.db.collection('products')
 
-  console.log(collection)
-
   try {
-    const product = await collection
-      .find({ _id: req.params.id })
-      .limit(1)
-      .toArray()
-
+    const product = await collection.findOne({ _id: ObjectId(req.params.id) })
 
     console.log(product)
-    res.send(product.shift())
+    res.send(product)
 
   } catch (error) {
     console.error(error)

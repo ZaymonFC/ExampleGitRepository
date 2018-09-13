@@ -1,9 +1,11 @@
+import { ObjectId } from 'mongodb'
+
 export async function removeProduct(req, res) {
   let collection = req.db.collection('products')
   const productId = req.params.id
 
   try {
-    const r = await collection.deleteOne({_id: productId})
+    const r = await collection.deleteOne({_id: ObjectId(productId)})
     console.log(r.deletedCount)
     if (r.deletedCount !== 1) throw 'Something went wrong deleting'
     res.send({

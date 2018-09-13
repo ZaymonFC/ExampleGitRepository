@@ -3,6 +3,7 @@ import { addProduct } from './data-access/add'
 import { updateProduct } from './data-access/update'
 import { removeProduct } from './data-access/remove'
 import { getProducts, getProduct } from './data-access/get'
+import { searchProducts } from './data-access/search'
 
 const path = require('path')
 let express = require('express')
@@ -41,6 +42,7 @@ app.delete('/product/:id', async (req, res) => removeProduct(req, res))
 app.patch('/product/:id', async (req, res) => updateProduct(req, res))
 app.get('/product', async (req, res) => getProducts(req, res))
 app.get('/product/:id', async (req, res) => getProduct(req, res))
+app.get('/product/search/:searchFilter', async (req, res) => searchProducts(req, res))
 
 app.get('/login/:username', (req, res) => {
   console.log('Logging in')

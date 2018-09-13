@@ -39,10 +39,10 @@ export class UpdateComponent implements OnInit {
 
     this.service.updateProduct({
       _id: this.product._id,
-      name: this.name,
-      description: this.description,
-      type: this.type,
-      price: this.price,
+      name: this.name ? this.name : this.product.name,
+      description: this.description ? this.description : this.product.description,
+      type: this.type ? this.type : this.product.type,
+      price: this.price ? this.price : this.product.price,
     })
 
     this.leave()

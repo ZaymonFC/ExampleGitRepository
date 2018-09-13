@@ -1,5 +1,7 @@
 export function sanitizeProduct(body) {
-  if (!(body.name && body.price && body.type && body.description && body.price)) {
+  console.log('Sanitizing:', body)
+
+  if (!(body.name && body.price && body.type && body.description)) {
     throw new Error('Error creating product')
   }
 
